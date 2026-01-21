@@ -1,6 +1,6 @@
 ---
 - name: Install Python3 ,Docker and Dcoker compose
-  hosts: docker_server
+  hosts: aws_ec2
   become: yes
   gather_facts: false
   vars: 
@@ -34,7 +34,7 @@
         name: docker
     
 - name: add ec2-user to docker group
-  hosts: docker_server
+  hosts: aws_ec2
   become: yes
   tasks:
     - name: add ec2-user to docker group
@@ -46,7 +46,7 @@
       ansible.builtin.meta: reset_connection
 
 - name: Start Docker Containers
-  hosts: docker_server 
+  hosts: aws_ec2 
   vars_files:
     - project-vars
   tasks:
