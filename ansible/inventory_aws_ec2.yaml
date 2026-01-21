@@ -2,3 +2,8 @@
 plugin: amazon.aws.aws_ec2
 egions:
   - ap-south-1
+
+# filter for use palyy book for specific *
+#filters:
+#    tag:Name: dev*
+#    instances-state-name: running
