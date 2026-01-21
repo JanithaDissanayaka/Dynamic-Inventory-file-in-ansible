@@ -7,6 +7,7 @@ variable "public_key" {}
 
 resource "aws_vpc" "inventory-vpc" {
   cidr_block = "10.0.0.0/16"
+  enable_dns_hostnames = true
 
   tags = {
     Name = "inventory-vpc"
@@ -58,7 +59,7 @@ resource "aws_security_group" "inventory-sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [var.my_ip]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -121,7 +122,6 @@ resource "aws_instance" "machine-3" {
   vpc_security_group_ids      = [aws_security_group.inventory-sg.id]
   associate_public_ip_address = true
   key_name                    = aws_key_pair.ssh.key_name
-
   tags = {
     Name = "machine-3"
   }
